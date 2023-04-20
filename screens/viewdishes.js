@@ -128,7 +128,7 @@ export default class ViewDishes extends Component {
                                                 </Text>
                                             </View>
                                             <View style={[{ flex: 1 }]}>
-                                                <Text style={[styles.menuTextDesc, { fontSize: 18 }]}>Available: {item.available}
+                                                <Text style={[styles.menuTextDesc, { fontSize: 18, marginTop: 5 }]}>Available: {item.available}
                                                 </Text>
                                             </View>
                                             <View style={[{ flex: 1, flexDirection: 'row', marginTop: -5 }]}>

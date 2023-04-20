@@ -11,7 +11,7 @@ export default class EditDishes extends Component {
             isLoading: true,
             dishData: undefined,
             itemOptionsModal: false,
-            updatedDishData: [],
+            newDish: [],
             dishID: '',
             dishName: '',
             dishPrice: '',
@@ -22,36 +22,13 @@ export default class EditDishes extends Component {
         }
     }
 
-    getDish() {
-        return fetch("http://192.168.1.209:8080/api/getdish.php",
+    addDish() {
+        return fetch("http://192.168.1.209:8080/api/adddish.php",
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    'dishID': this.state.dishID
-                })
-            })
-            .then((response) => {
-                return response.json();
-            })
-            .then((responseJson) => {
-                this.setState({
-                    dishData: responseJson,
-                    isLoading: false,
-                }, () => { console.log(this.state.dishData) });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
-
-    updateDish() {
-        return fetch("http://192.168.1.209:8080/api/updatedish.php",
-            {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    'updatedDish': this.state.updatedDishData[0]
+                    'newDish': this.state.newDish[0]
                 })
             })
             .then((response) => {
@@ -63,8 +40,7 @@ export default class EditDishes extends Component {
                     dishQuantity: '',
                     dishAvailable: '',
                     dishSpecial: '',
-                })
-                this.getDish();
+                },()=>{alert('successfully added new dish')})
             })
             .catch((error) => {
                 console.log(error);
@@ -107,59 +83,60 @@ export default class EditDishes extends Component {
 
     componentDidMount() {
         this.setState({
-            dishID: this.props.route.params.dishID
-        }, () => { this.getDish(); })
+            isLoading: false
+        })
     }
 
     updateDishInfo() {
-        var updatedDish = this.state.dishData
+        var addNewDish = [{
+            dish:'',
+            price:0,
+            desc:'',
+            quantity:0,
+            available:0,
+            special:0,
+        }]
+
         if (this.state.dishName == '') {
-            updatedDish[0].dish = this.state.dishData[0].dish
+            alert("field dish-name cannot be empty")
         }
         else {
-            updatedDish[0].dish = this.state.dishName
+            addNewDish[0].dish = this.state.dishName
         }
         if (this.state.dishPrice == '') {
-            updatedDish[0].price = Number(this.state.dishData[0].price)
+            alert("field dish-name cannot be empty")
         }
         else {
-            updatedDish[0].price = Number(this.state.dishPrice)
+            addNewDish[0].price = Number(this.state.dishPrice)
         }
         if (this.state.dishDescription == '') {
-            updatedDish[0].desc = this.state.dishData[0].desc
+            alert("field dish-name cannot be empty")
         }
         else {
-            updatedDish[0].desc = this.state.dishDescription
+            addNewDish[0].desc = this.state.dishDescription
         }
         if (this.state.dishQuantity == '') {
-            updatedDish[0].quantity = Number(this.state.dishData[0].quantity)
+            alert("field dish-name cannot be empty")
         }
         else {
-            updatedDish[0].quantity = Number(this.state.dishQuantity)
+            addNewDish[0].quantity = Number(this.state.dishQuantity)
         }
         if (this.state.dishAvailable == '') {
-            updatedDish[0].available = Number(this.state.dishData[0].available)
-            if(this.state.dishQuantity > 5){
-                updatedDish[0].available = 1
-            }else{
-                updatedDish[0].available = 0
-            }
+            alert("field dish-name cannot be empty")
         }
         else {
-            updatedDish[0].available = Number(this.state.dishAvailable)
+            addNewDish[0].available = Number(this.state.dishAvailable)
         }
         if (this.state.dishSpecial == '') {
-            updatedDish[0].special = Number(this.state.dishData[0].special)
+            alert("field dish-name cannot be empty")
         }
         else {
-            updatedDish[0].special = Number(this.state.dishSpecial)
+            addNewDish[0].special = Number(this.state.dishSpecial)
         }
 
-        updatedDish[0].id = Number(this.state.dishData[0].id)
-
         this.setState({
-            updatedDishData: updatedDish
-        }, () => { this.updateDish() })
+            newDish: addNewDish
+        }, () => { this.addDish() })
     }
 
     render() {
@@ -213,37 +190,37 @@ export default class EditDishes extends Component {
                 <View style={[{ flex: 1, padding: 5, marginTop: 60 }]}>
                     <ScrollView style={{ flex: 8 }}>
                         <Text style={[styles.text]}>
-                            Name: {this.state.dishData[0].dish}
+                            Name:
                         </Text>
                         <TextInput style={[styles.textInput]} placeholder='Dish Name' value={this.state.dishName} onChangeText={this.dishNameChange} />
                         <Text style={[styles.text]}>
-                            Price: {this.state.dishData[0].price}
+                            Price:
                         </Text>
                         <TextInput style={[styles.textInput]} placeholder='price in pence (999 for £9.99)' value={this.state.dishPrice} onChangeText={this.dishPriceChange} />
                         <Text style={[styles.text]}>
-                            Description: {this.state.dishData[0].desc}
+                            Description:
                         </Text>
                         <TextInput style={[styles.textInput]} placeholder='Description' value={this.state.dishDescription} onChangeText={this.dishDescriptionChange} />
                         <Text style={[styles.text]}>
-                            Quantity: {this.state.dishData[0].quantity}
+                            Quantity:
                         </Text>
                         <TextInput style={[styles.textInput]} placeholder='Quantity' value={this.state.dishQuantity} onChangeText={this.dishQuantityChange} />
                         <Text style={[styles.text]}>
-                            Available: {this.state.dishData[0].available}
+                            Available:
                         </Text>
                         <TextInput style={[styles.textInput]} placeholder='1 = available, 0 = unavailable' value={this.state.dishAvailable} onChangeText={this.dishAvailableChange} />
                         <Text style={[styles.text]}>
-                            Special: {this.state.dishData[0].special}
+                            Special:
                         </Text>
                         <TextInput style={[styles.textInput]} placeholder='1 = special, 0 = not special' value={this.state.dishSpecial} onChangeText={this.dishSpecialChange} />
                     </ScrollView>
                     <View style={{ flex: 3, }}>
                         <TouchableOpacity style={[styles.box]} onPress={() => { this.updateDishInfo() }}>
                             <Text style={[styles.text]}>
-                                Update Dish Information
+                                Add Dish
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.box]} onPress={() => { this.props.navigation.navigate('ViewDishes') }}>
+                        <TouchableOpacity style={[styles.box]} onPress={() => { this.props.navigation.navigate('Home') }}>
                             <Text style={[styles.text]}>
                                 Back
                             </Text>

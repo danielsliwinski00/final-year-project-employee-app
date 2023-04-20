@@ -10,6 +10,7 @@ import Home from './screens/home.js'
 import ViewDishes from './screens/viewdishes.js'
 import EditDishes from './screens/editdishes.js'
 import ViewOrders from './screens/vieworders.js'
+import AddDish from './screens/adddish.js'
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +34,12 @@ export default function App() {
           }}
         />
         <Stack.Screen name="ViewOrders" component={ViewOrders}
+          options={{
+            headerTitle: "", headerTransparent: true,
+            animationEnabled: 'true',
+          }}
+        />
+        <Stack.Screen name="AddDish" component={AddDish}
           options={{
             headerTitle: "", headerTransparent: true,
             animationEnabled: 'true',

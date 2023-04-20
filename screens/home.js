@@ -169,9 +169,9 @@ export default class Home extends Component {
                             View Dishes
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.box]} onPress={()=>{this.props.navigation.navigate('EditDish')}}>
+                    <TouchableOpacity style={[styles.box]} onPress={()=>{this.props.navigation.navigate('AddDish')}}>
                         <Text style={[styles.text]}>
-                            Edit Dish
+                            Add New Dish
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.box]} onPress={()=>{this.props.navigation.navigate('ViewOrders')}}>
