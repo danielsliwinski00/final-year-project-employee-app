@@ -19,11 +19,12 @@ export default class EditDishes extends Component {
             dishQuantity: '',
             dishAvailable: '',
             dishSpecial: '',
+            dishType:'',
         }
     }
 
     addDish() {
-        return fetch("http://192.168.1.209:8080/api/adddish.php",
+        return fetch("http://192.168.1.102:8080/api/adddish.php",
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -79,6 +80,9 @@ export default class EditDishes extends Component {
     }
     dishSpecialChange = (text) => {
         this.setState({ dishSpecial: text, })
+    }
+    dishTypeChange = (text) => {
+        this.setState({ dishType: text, })
     }
 
     componentDidMount() {
@@ -208,19 +212,23 @@ export default class EditDishes extends Component {
                         <Text style={[styles.text]}>
                             Available:
                         </Text>
-                        <TextInput style={[styles.textInput]} placeholder='1 = available, 0 = unavailable' value={this.state.dishAvailable} onChangeText={this.dishAvailableChange} />
+                        <TextInput style={[styles.textInput]} placeholder='1: available, 0: unavailable' value={this.state.dishAvailable} onChangeText={this.dishAvailableChange} />
                         <Text style={[styles.text]}>
                             Special:
                         </Text>
-                        <TextInput style={[styles.textInput]} placeholder='1 = special, 0 = not special' value={this.state.dishSpecial} onChangeText={this.dishSpecialChange} />
+                        <TextInput style={[styles.textInput]} placeholder='1: special, 0: not special' value={this.state.dishSpecial} onChangeText={this.dishSpecialChange} />
+                        <Text style={[styles.text]}>
+                            Type:
+                        </Text>
+                        <TextInput style={[styles.textInput]} placeholder='1: food, 2: drinks, 3: desserts' value={this.state.dishType} onChangeText={this.dishTypeChange} />
                     </ScrollView>
-                    <View style={{ flex: 3, }}>
-                        <TouchableOpacity style={[styles.box]} onPress={() => { this.updateDishInfo() }}>
+                    <View style={{ flex: 1, flexDirection: 'row' }}>
+                        <TouchableOpacity style={[styles.box,{flex:1, textAlign:'center'}]} onPress={() => { this.updateDishInfo() }}>
                             <Text style={[styles.text]}>
                                 Add Dish
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.box]} onPress={() => { this.props.navigation.navigate('Home') }}>
+                        <TouchableOpacity style={[styles.box,{flex:1, textAlign:'center'}]} onPress={() => { this.props.navigation.navigate('Home') }}>
                             <Text style={[styles.text]}>
                                 Back
                             </Text>

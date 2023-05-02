@@ -23,7 +23,7 @@ export default class EditDishes extends Component {
     }
 
     getDish() {
-        return fetch("http://192.168.1.209:8080/api/getdish.php",
+        return fetch("http://192.168.1.102:8080/api/getdish.php",
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -46,7 +46,7 @@ export default class EditDishes extends Component {
     }
 
     updateDish() {
-        return fetch("http://192.168.1.209:8080/api/updatedish.php",
+        return fetch("http://192.168.1.102:8080/api/updatedish.php",
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -139,11 +139,6 @@ export default class EditDishes extends Component {
         }
         if (this.state.dishAvailable == '') {
             updatedDish[0].available = Number(this.state.dishData[0].available)
-            if(this.state.dishQuantity > 5){
-                updatedDish[0].available = 1
-            }else{
-                updatedDish[0].available = 0
-            }
         }
         else {
             updatedDish[0].available = Number(this.state.dishAvailable)

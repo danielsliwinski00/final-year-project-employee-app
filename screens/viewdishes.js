@@ -16,7 +16,7 @@ export default class ViewDishes extends Component {
     }
 
     getMenu() {
-        return fetch("http://192.168.1.209:8080/api/menu.php",
+        return fetch("http://192.168.1.102:8080/api/menu.php",
             {
                 headers: { 'Content-Type': 'application/json' }
             })
@@ -127,8 +127,10 @@ export default class ViewDishes extends Component {
                                                 <Text style={[styles.menuTextDesc, { fontSize: 18 }]}>{item.desc}
                                                 </Text>
                                             </View>
-                                            <View style={[{ flex: 1 }]}>
-                                                <Text style={[styles.menuTextDesc, { fontSize: 18, marginTop: 5 }]}>Available: {item.available}
+                                            <View style={[{ flex: 1, flexDirection: 'row', marginTop: -5 }]}>
+                                                <Text style={[styles.menuTextDesc, { flex: 1, fontSize: 18, marginTop: 5 }]}>Available: {item.available}
+                                                </Text>
+                                                <Text style={[styles.menuTextDesc, { flex: 1, fontSize: 18, alignSelf: 'center' }]}>Type: {item.type}
                                                 </Text>
                                             </View>
                                             <View style={[{ flex: 1, flexDirection: 'row', marginTop: -5 }]}>

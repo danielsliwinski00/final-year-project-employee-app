@@ -17,7 +17,7 @@ export default class Home extends Component {
     }
 
     getMenu() {
-        return fetch("http://192.168.1.209:8080/api/menu.php",
+        return fetch("http://192.168.1.102:8080/api/menu.php",
             {
                 headers: { 'Content-Type': 'application/json' }
             })
@@ -135,22 +135,6 @@ export default class Home extends Component {
     componentDidMount() {
         this.getTable();
         this.getMenu();
-/*
-        this.props.navigation.addListener('focus', async () => {
-            await this.setState({
-                isLoading: true,
-                menuData: [],
-                cartItems: [],
-                table: 0,
-                counterUpdate: 0,
-            })
-            this.getTable();
-            this.getMenu();
-        });*/ 
-    }
-
-    componentWillUnmount() {
-        //clearInterval(this.timerId)
     }
 
     render() {
@@ -163,7 +147,7 @@ export default class Home extends Component {
         }
         return (
             <View style={[styles.viewHome]}>
-                <View style={[{ flex: 1, }]}>
+                <View style={[{ flex: 1, marginTop:'50%'}]}>
                     <TouchableOpacity style={[styles.box]}>
                         <Text style={[styles.text]} onPress={()=>{this.props.navigation.navigate('ViewDishes')}}>
                             View Dishes
