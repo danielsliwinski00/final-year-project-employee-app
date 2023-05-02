@@ -16,7 +16,7 @@ export default class ViewDishes extends Component {
     }
 
     getMenu() {
-        return fetch("http://192.168.1.102:8080/api/menu.php",
+        return fetch("http://192.168.1.102:8080/final-year-project-php-api/menu.php",
             {
                 headers: { 'Content-Type': 'application/json' }
             })

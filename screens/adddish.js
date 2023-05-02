@@ -24,7 +24,7 @@ export default class EditDishes extends Component {
     }
 
     addDish() {
-        return fetch("http://192.168.1.102:8080/api/adddish.php",
+        return fetch("http://192.168.1.102:8080/final-year-project-php-api/adddish.php",
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
