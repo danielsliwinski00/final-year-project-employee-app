@@ -146,7 +146,7 @@ export default class Home extends Component {
         }
         return (
             <View style={[styles.viewHome]}>
-                <View style={[{ flex: 1, marginTop:'50%'}]}>
+                <View style={[{ flex: 1}]}>
                     <TouchableOpacity style={[styles.box]}>
                         <Text style={[styles.text]} onPress={()=>{this.props.navigation.navigate('ViewDishes')}}>
                             View Dishes
