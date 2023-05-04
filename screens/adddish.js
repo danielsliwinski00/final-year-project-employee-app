@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { FlatList, ActivityIndicator, Text, View, Button, StyleSheet, Box, Image, Modal } from 'react-native';
 import { TextInput, TouchableOpacity, ScrollView } from 'react-native-web';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './assets/stylesheet.js';
 
 export default class EditDishes extends Component {
@@ -19,7 +18,7 @@ export default class EditDishes extends Component {
             dishQuantity: '',
             dishAvailable: '',
             dishSpecial: '',
-            dishType:'',
+            dishType: '',
         }
     }
 
@@ -41,7 +40,8 @@ export default class EditDishes extends Component {
                     dishQuantity: '',
                     dishAvailable: '',
                     dishSpecial: '',
-                },()=>{alert('successfully added new dish')})
+                    dishType: '',
+                }, () => { toast.show('successfully added new dish', { type: 'success' }) })
             })
             .catch((error) => {
                 console.log(error);
@@ -93,49 +93,56 @@ export default class EditDishes extends Component {
 
     updateDishInfo() {
         var addNewDish = [{
-            dish:'',
-            price:0,
-            desc:'',
-            quantity:0,
-            available:0,
-            special:0,
+            dish: '',
+            price: 0,
+            desc: '',
+            quantity: 0,
+            available: 0,
+            special: 0,
+            type: 0,
         }]
 
         if (this.state.dishName == '') {
-            alert("field dish-name cannot be empty")
+            return toast.show("field dish-name cannot be empty", { type: 'danger' })
         }
         else {
             addNewDish[0].dish = this.state.dishName
         }
         if (this.state.dishPrice == '') {
-            alert("field dish-name cannot be empty")
+            return toast.show("field dish-price cannot be empty", { type: 'danger' })
         }
         else {
             addNewDish[0].price = Number(this.state.dishPrice)
         }
         if (this.state.dishDescription == '') {
-            alert("field dish-name cannot be empty")
+            return toast.show("field dish-description cannot be empty", { type: 'danger' })
         }
         else {
             addNewDish[0].desc = this.state.dishDescription
         }
         if (this.state.dishQuantity == '') {
-            alert("field dish-name cannot be empty")
+            return toast.show("field dish-quantity cannot be empty", { type: 'danger' })
         }
         else {
             addNewDish[0].quantity = Number(this.state.dishQuantity)
         }
         if (this.state.dishAvailable == '') {
-            alert("field dish-name cannot be empty")
+            return toast.show("field dish-available cannot be empty", { type: 'danger' })
         }
         else {
             addNewDish[0].available = Number(this.state.dishAvailable)
         }
         if (this.state.dishSpecial == '') {
-            alert("field dish-name cannot be empty")
+            return toast.show("field dish-special cannot be empty", { type: 'danger' })
         }
         else {
             addNewDish[0].special = Number(this.state.dishSpecial)
+        }
+        if (this.state.dishType == '') {
+            return toast.show("field dish-type cannot be empty", { type: 'danger' })
+        }
+        else {
+            addNewDish[0].type = Number(this.state.dishType)
         }
 
         this.setState({
@@ -223,12 +230,12 @@ export default class EditDishes extends Component {
                         <TextInput style={[styles.textInput]} placeholder='1: food, 2: drinks, 3: desserts' value={this.state.dishType} onChangeText={this.dishTypeChange} />
                     </ScrollView>
                     <View style={{ flex: 1, flexDirection: 'row' }}>
-                        <TouchableOpacity style={[styles.box,{flex:1, textAlign:'center'}]} onPress={() => { this.updateDishInfo() }}>
+                        <TouchableOpacity style={[styles.box, { flex: 1, textAlign: 'center' }]} onPress={() => { this.updateDishInfo() }}>
                             <Text style={[styles.text]}>
                                 Add Dish
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.box,{flex:1, textAlign:'center'}]} onPress={() => { this.props.navigation.navigate('Home') }}>
+                        <TouchableOpacity style={[styles.box, { flex: 1, textAlign: 'center' }]} onPress={() => { this.props.navigation.navigate('Home') }}>
                             <Text style={[styles.text]}>
                                 Back
                             </Text>

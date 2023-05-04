@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { FlatList, ActivityIndicator, Text, View, Button, StyleSheet, Box, Image, Modal } from 'react-native';
 import { TextInput, TouchableOpacity, ScrollView } from 'react-native-web';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './assets/stylesheet.js';
 
 export default class ViewDishes extends Component {
@@ -85,7 +84,7 @@ export default class ViewDishes extends Component {
                         <View style={[styles.optionsPanelContacts, { height: 160, width: '90%', top: 200, right: '5%', borderRadius: 15 }]}>
                             <TouchableOpacity
                                 style={{ alignSelf: 'center', width: '80%', marginTop: 5 }}
-                                onPress={() => { this.setState({itemOptionsModal: false}),this.props.navigation.navigate('EditDishes', {dishID: this.state.dishID})}}>
+                                onPress={() => { this.setState({itemOptionsModal: false}), this.props.navigation.navigate('EditDishes', {dishID: this.state.dishID})}}>
                                 <Text style={[styles.text, {
                                     fontSize: 20, color: '#2e4052', alignSelf: 'Center', alignItems: 'center',
                                     paddingHorizontal: 12, paddingVertical: 5,

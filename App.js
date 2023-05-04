@@ -11,6 +11,7 @@ import ViewDishes from './screens/viewdishes.js'
 import EditDishes from './screens/editdishes.js'
 import ViewOrders from './screens/vieworders.js'
 import AddDish from './screens/adddish.js'
+import Toast from "react-native-toast-notifications";
 
 const Stack = createNativeStackNavigator();
 
@@ -46,6 +47,7 @@ export default function App() {
           }}
         />
       </Stack.Navigator>
+      <Toast ref={(ref) => global['toast'] = ref} />
     </NavigationContainer>
   );
 }

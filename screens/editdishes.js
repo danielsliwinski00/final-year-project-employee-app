@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { FlatList, ActivityIndicator, Text, View, Button, StyleSheet, Box, Image, Modal } from 'react-native';
 import { TextInput, TouchableOpacity, ScrollView } from 'react-native-web';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './assets/stylesheet.js';
 
 export default class EditDishes extends Component {
@@ -19,16 +18,18 @@ export default class EditDishes extends Component {
             dishQuantity: '',
             dishAvailable: '',
             dishSpecial: '',
+            dishType:'',
         }
     }
 
     getDish() {
+        console.log(this.state.dishID)
         return fetch("http://13.53.140.87/getdish.php",
             {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                    'dishID': this.state.dishID
+                    "dishID": this.state.dishID
                 })
             })
             .then((response) => {
@@ -63,8 +64,8 @@ export default class EditDishes extends Component {
                     dishQuantity: '',
                     dishAvailable: '',
                     dishSpecial: '',
-                })
-                this.getDish();
+                    dishType: '',
+                },()=>{this.getDish();})
             })
             .catch((error) => {
                 console.log(error);
@@ -104,11 +105,8 @@ export default class EditDishes extends Component {
     dishSpecialChange = (text) => {
         this.setState({ dishSpecial: text, })
     }
-
-    componentDidMount() {
-        this.setState({
-            dishID: this.props.route.params.dishID
-        }, () => { this.getDish(); })
+    dishTypeChange = (text) => {
+        this.setState({ dishType: text, })
     }
 
     updateDishInfo() {
@@ -149,12 +147,24 @@ export default class EditDishes extends Component {
         else {
             updatedDish[0].special = Number(this.state.dishSpecial)
         }
+        if (this.state.dishType == '') {
+            updatedDish[0].type = Number(this.state.dishData[0].type)
+        }
+        else {
+            updatedDish[0].type = Number(this.state.dishType)
+        }
 
         updatedDish[0].id = Number(this.state.dishData[0].id)
 
         this.setState({
             updatedDishData: updatedDish
         }, () => { this.updateDish() })
+    }
+
+    componentDidMount() {
+        this.setState({
+            dishID: this.props.route.params.dishID
+        }, () => { this.getDish(); })
     }
 
     render() {
@@ -231,6 +241,10 @@ export default class EditDishes extends Component {
                             Special: {this.state.dishData[0].special}
                         </Text>
                         <TextInput style={[styles.textInput]} placeholder='1 = special, 0 = not special' value={this.state.dishSpecial} onChangeText={this.dishSpecialChange} />
+                        <Text style={[styles.text]}>
+                            Type: {this.state.dishData[0].type}
+                        </Text>
+                        <TextInput style={[styles.textInput]} placeholder='1: food, 2: drinks, 3: desserts' value={this.state.dishType} onChangeText={this.dishTypeChange} />
                     </ScrollView>
                     <View style={{ flex: 3, }}>
                         <TouchableOpacity style={[styles.box]} onPress={() => { this.updateDishInfo() }}>
