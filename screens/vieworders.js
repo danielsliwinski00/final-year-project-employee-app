@@ -20,7 +20,7 @@ export default class ViewOrders extends Component {
     }
 
     getOrders() {
-        return fetch("http://13.53.140.87/vieworders.php",
+        return fetch("http://16.16.126.246/vieworders.php",
             {
                 headers: { 'Content-Type': 'application/json' }
             })
@@ -42,7 +42,7 @@ export default class ViewOrders extends Component {
     }
 
     orderComplete() {
-        return fetch("http://13.53.140.87/ordercomplete.php",
+        return fetch("http://16.16.126.246/ordercomplete.php",
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

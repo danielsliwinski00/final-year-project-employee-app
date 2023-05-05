@@ -23,7 +23,7 @@ export default class EditDishes extends Component {
     }
 
     addDish() {
-        return fetch("http://13.53.140.87/adddish.php",
+        return fetch("http://16.16.126.246/adddish.php",
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
