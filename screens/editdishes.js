@@ -24,7 +24,7 @@ export default class EditDishes extends Component {
 
     getDish() {
         console.log(this.state.dishID)
-        return fetch("http://16.16.126.246/getdish.php",
+        return fetch("http://localhost/final-year-project-php-api/getdish.php",
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json'},
@@ -47,7 +47,7 @@ export default class EditDishes extends Component {
     }
 
     updateDish() {
-        return fetch("http://16.16.126.246/updatedish.php",
+        return fetch("http://localhost/final-year-project-php-api/updatedish.php",
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
